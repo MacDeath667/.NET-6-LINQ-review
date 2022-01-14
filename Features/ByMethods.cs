@@ -11,9 +11,9 @@ internal class ByMethods
         //todo split to methods, 
         Console.WriteLine("----DistinctBy, UnionBy, IntersectBy, ExceptBy----");
 
-        IEnumerable<Person> evenAgedPeople = source.Where(person => person.Age % 2 == 0).ToList();
+        IEnumerable<Person> evenAgedPeople = source.Where(person => person.Age % 2 == 0);
         //Roma, Ghost
-        IEnumerable<Person> personAbove30 = source.Where(person => person.Age > 30).ToList();
+        IEnumerable<Person> personAbove30 = source.Where(person => person.Age > 30);
         //Gregor,Roman, Ghost
 
         UnionBy(evenAgedPeople, personAbove30);
@@ -27,7 +27,7 @@ internal class ByMethods
     private static void UnionBy(IEnumerable<Person> evenAgedPeople, IEnumerable<Person> personAbove30)
     {
         //What we did before:
-        IEnumerable<Person> union = evenAgedPeople.Union(personAbove30, new PersonByAgeComparer()).ToList();
+        IEnumerable<Person> union = evenAgedPeople.Union(personAbove30, new PersonByAgeComparer());
         Console.WriteLine($"Union: {string.Join(", ", union.Select(person => person.Name))}");
 
         IEnumerable<Person> unionBy = evenAgedPeople.UnionBy(personAbove30, x => x.Age);
