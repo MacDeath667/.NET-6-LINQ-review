@@ -8,7 +8,6 @@ internal class ByMethods
 {
     public static void Demonstrate(IEnumerable<Person> source)
     {
-        //todo split to methods, 
         Console.WriteLine("----DistinctBy, UnionBy, IntersectBy, ExceptBy----");
 
         IEnumerable<Person> evenAgedPeople = source.Where(person => person.Age % 2 == 0);
@@ -30,8 +29,8 @@ internal class ByMethods
         IEnumerable<Person> union = evenAgedPeople.Union(personAbove30, new PersonByAgeComparer());
         Console.WriteLine($"Union: {string.Join(", ", union.Select(person => person.Name))}");
 
-        IEnumerable<Person> unionBy = evenAgedPeople.UnionBy(personAbove30, x => x.Age);
-        //Roman, Roma, Gregor, Ghost
+        IEnumerable<Person> unionBy = evenAgedPeople.UnionBy(personAbove30, x => x.Age).ToArray();
+        //Roman, Roma, Gregor
         Console.WriteLine($"Union: {string.Join(", ", unionBy.Select(person => person.Name))}");
     }
 
@@ -54,10 +53,11 @@ internal class ByMethods
         Console.WriteLine($"Distinct: {string.Join(",", distinct.Select(person => person.Name))}");
 
         IEnumerable<Person> distinctBy =
-            evenAgedPeople.DistinctBy(x=>x, new PersonByAgeComparer());
+            evenAgedPeople.DistinctBy(x => x, new PersonByAgeComparer());
         //Ghost
         Console.WriteLine($"Distinct: {string.Join(",", distinctBy.Select(person => person.Name))}");
     }
+
     private static void ExceptBy(IEnumerable<Person> evenAgedPeople, IEnumerable<Person> personAbove30)
     {
         //What we did before:
@@ -80,11 +80,11 @@ internal class ByMethods
     {
         public bool Equals(Person x, Person y)
         {
-            //if (ReferenceEquals(x, null)) return false;
-            //if (ReferenceEquals(y, null)) return false;
+            if (ReferenceEquals(x, null)) return false;
+            if (ReferenceEquals(y, null)) return false;
             return x.Age == y.Age;
         }
 
-        public int GetHashCode(Person obj) => HashCode.Combine(obj.Name, obj.Age);
+        public int GetHashCode(Person obj) => HashCode.Combine(obj.Age);
     }
 }

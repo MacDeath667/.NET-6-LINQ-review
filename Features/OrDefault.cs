@@ -6,10 +6,20 @@ namespace NewLinqFeatures.Features;
 
 internal class OrDefault
 {
-    public static void Demonstrate() //todo: was - now - and for struct -age less 10
+    public static void Demonstrate(IEnumerable<Person> enumerable)
     {
         Console.WriteLine("----FirstOrDefault/LastOrDefault/SingleOrDefault overloads with default----");
 
+        OrDefaultReferenceType();
+        OrDefaultValueType(enumerable);
+        
+        var listWithZero = enumerable.ToList();
+        listWithZero.Add(new Person {Id = -1, Name = "None", Age = 0});
+        OrDefaultValueType(listWithZero);
+    }
+
+    private static void OrDefaultReferenceType()
+    {
         VmSize[] vmSizesA =
         {
             new("Medium", 300),
@@ -24,9 +34,19 @@ internal class OrDefault
 
         IEnumerable<VmSize> vmSizes = vmSizesA.IntersectBy(vmSizesB.Select(x => x.Name), x => x.Name);
         VmSize firstOrDefault = vmSizes.FirstOrDefault();
-        VmSize overridedFirstOrDefault = vmSizes.FirstOrDefault(VmSize.Empty);
+        VmSize overloadedFirstOrDefault = vmSizes.FirstOrDefault(VmSize.Empty);
 
-        Console.WriteLine($"Overrided FirstOrDefault: {overridedFirstOrDefault}; Old FirstOrDefault: {firstOrDefault}");
+        Console.WriteLine(
+            $"Overloaded FirstOrDefault: {overloadedFirstOrDefault}; Old FirstOrDefault: {firstOrDefault}");
+    }
+
+    private static void OrDefaultValueType(IEnumerable<Person> enumerable)
+    {
+        var firstOrDefault = enumerable.Where(x => x.Age < 10).Select(x => x.Age).FirstOrDefault();
+        var overloadedFirstOrDefault = enumerable.Where(x => x.Age < 10).Select(x => x.Age).FirstOrDefault(-1);
+
+        Console.WriteLine(
+            $"Overloaded FirstOrDefault: {overloadedFirstOrDefault}; Old FirstOrDefault: {firstOrDefault}");
     }
 
     private class VmSize

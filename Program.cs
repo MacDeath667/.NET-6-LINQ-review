@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using NewLinqFeatures.Features;
 
 namespace NewLinqFeatures
 {
     class Program
     {
-        public static List<Person> People = new()
+        public static List<Person> People => new()
         {
             new Person {Id = 1, Name = "Gregor", Age = 33},
             new Person {Id = 2, Name = "Roman", Age = 32},
@@ -38,7 +39,7 @@ namespace NewLinqFeatures
             TryGetNonEnumeratedCount.Demonstrate(People);
             TryGetNonEnumeratedCount.Demonstrate(PeopleEnumerable);
             
-            OrDefault.Demonstrate();
+            OrDefault.Demonstrate(People);
             Zip.Demonstrate(People);
         }
     }
