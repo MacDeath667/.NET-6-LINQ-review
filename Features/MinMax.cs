@@ -10,30 +10,29 @@ internal class MinMax
     {
         Console.WriteLine("----MinBy----");
 
-        //Without using MaxBy and MinBy
-
+        //old way
         Person oldWay = source
             .OrderBy(person => person.Age)
             .First();
-
+        Console.WriteLine($"Youngest Person: {oldWay.Name}");
+        
+        //new way
         Person newWay = source.MinBy(person => person.Age);
-        Console.WriteLine($"Youngest Person using MaxBy: {newWay.Name}");
-
         Console.WriteLine($"Youngest Person without using MaxBy: {newWay.Name}");
     }
 
     public static void DemonstrateMaxBy(IEnumerable<Person> source)
     {
         Console.WriteLine("----MaxBy----");
-        //Without using MaxBy and MinBy
+        
+        //old way
         Person oldWay = source
             .OrderByDescending(person => person.Age)
             .First();
-        Console.WriteLine($"Oldest Person without using MaxBy: {oldWay.Name}");
+        Console.WriteLine($"Oldest Person: {oldWay.Name}");
         
+        //new way
         Person newWay = source.MaxBy(person => person.Age);
-        Console.WriteLine($"Oldest Person using MaxBy: {oldWay.Name}");
-
-       
+        Console.WriteLine($"Oldest Person using MaxBy: {newWay.Name}");
     }
 }

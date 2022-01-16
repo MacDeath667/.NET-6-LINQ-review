@@ -24,7 +24,6 @@ namespace NewLinqFeatures
                 yield return new Person {Id = 3, Name = "Roma", Age = 28};
                 yield return new Person {Id = 4, Name = "Pavel", Age = 29};
                 yield return new Person {Id = 5, Name = "Ghost", Age = 33};
-                yield return new Person {Id = -1, Name = "None", Age = 0};
             }
         }
 
@@ -35,10 +34,8 @@ namespace NewLinqFeatures
             Chunks.Demonstrate(People);
             ByMethods.Demonstrate(People);
             IndexAndRange.Demonstrate(People);
-            
             TryGetNonEnumeratedCount.Demonstrate(People);
             TryGetNonEnumeratedCount.Demonstrate(PeopleEnumerable);
-            
             OrDefault.Demonstrate(People);
             Zip.Demonstrate(People);
         }
