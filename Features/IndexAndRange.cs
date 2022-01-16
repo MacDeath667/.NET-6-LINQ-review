@@ -24,7 +24,6 @@ internal class IndexAndRange
         IEnumerable<Person> skip1Person = source.Take(1..);
         Console.WriteLine(string.Join(", ", skip1Person.Select(person => person.Name)));
         //Roman, Roma, Pavel, Ghost
-
         
         IEnumerable<Person> take3Skip1PeopleOld = source.Take(3).Skip(1);
         IEnumerable<Person> take3Skip1People = source.Take(1..3);
