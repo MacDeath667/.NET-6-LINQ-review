@@ -6,7 +6,7 @@ namespace NewLinqFeatures.Features;
 
 internal class Chunks
 {
-    public static void Demonstrate(IEnumerable<Person> source)
+    public static void Demonstrate(IEnumerable<Cyclist> source)
     {
         Console.WriteLine("----Chunk----");
 
@@ -15,9 +15,9 @@ internal class Chunks
         var chunkNew = ChunkNew(source, chunkSize);
     }
 
-    private static IEnumerable<IEnumerable<Person>> ChunkNew(IEnumerable<Person> source, int chunkSize)
+    private static IEnumerable<IEnumerable<Cyclist>> ChunkNew(IEnumerable<Cyclist> source, int chunkSize)
     {
-        IEnumerable<IEnumerable<Person>> cluster = source.Chunk(chunkSize);
+        IEnumerable<IEnumerable<Cyclist>> cluster = source.Chunk(chunkSize);
         foreach (var chunk in cluster)
         {
             Console.WriteLine($"Cluster of {string.Join(", ", chunk.Select(person => person.Name))}");
@@ -26,7 +26,7 @@ internal class Chunks
         return cluster;
     }
 
-    private static IEnumerable<IEnumerable<Person>> ChunkOld(IEnumerable<Person> source, int chunkSize)
+    private static IEnumerable<IEnumerable<Cyclist>> ChunkOld(IEnumerable<Cyclist> source, int chunkSize)
     {
         Console.WriteLine("Without chunk:");
 
@@ -41,24 +41,24 @@ internal class Chunks
         return cluster1;
     }
 
-    private static IEnumerable<IEnumerable<Person>> Chunk1(IEnumerable<Person> source, int chunkSize)
+    private static IEnumerable<IEnumerable<Cyclist>> Chunk1(IEnumerable<Cyclist> source, int chunkSize)
     {
-        IEnumerable<IEnumerable<Person>> cluster = source
+        IEnumerable<IEnumerable<Cyclist>> cluster = source
             .Select((x, i) => new {Index = i, Value = x})
             .GroupBy(x => x.Index / chunkSize)
             .Select(x => x.Select(v => v.Value));
         return cluster;
     }
 
-    private static IEnumerable<IEnumerable<Person>> Chunk2(IEnumerable<Person> source, int chunkSize)
+    private static IEnumerable<IEnumerable<Cyclist>> Chunk2(IEnumerable<Cyclist> source, int chunkSize)
     {
-        List<List<Person>> altCluster = new List<List<Person>>();
+        List<List<Cyclist>> altCluster = new List<List<Cyclist>>();
         int count = source.Count();
         for (int i = 0; i < count; i++)
         {
             int chunkIndex = i / chunkSize;
             if (altCluster.Skip(chunkIndex).FirstOrDefault() is null)
-                altCluster.Add(new List<Person>());
+                altCluster.Add(new List<Cyclist>());
             altCluster[chunkIndex].Add(source.Skip(i).FirstOrDefault());
         }
 

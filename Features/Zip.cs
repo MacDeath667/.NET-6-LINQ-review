@@ -6,7 +6,7 @@ namespace NewLinqFeatures.Features;
 
 public class Zip
 {
-    public static void Demonstrate(IEnumerable<Person> source)
+    public static void Demonstrate(IEnumerable<Cyclist> source)
     {
         Console.WriteLine("----Zip with 3 parameters----");
 

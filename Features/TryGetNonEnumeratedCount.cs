@@ -6,7 +6,7 @@ namespace NewLinqFeatures.Features;
 
 internal class TryGetNonEnumeratedCount
 {
-    public static void Demonstrate(IEnumerable<Person> source)
+    public static void Demonstrate(IEnumerable<Cyclist> source)
     {
         Console.WriteLine("----TryGetNonEnumeratedCount----");
         bool doneWithoutEnumerating = source.TryGetNonEnumeratedCount(out var sourceCount);
