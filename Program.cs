@@ -49,7 +49,7 @@ namespace NewLinqFeatures
             IndexAndRange.Demonstrate(Cyclists);
             TryGetNonEnumeratedCount.Demonstrate(Cyclists);
             TryGetNonEnumeratedCount.Demonstrate(CyclistsEnumerable);
-            TryGetNonEnumeratedCount.Demonstrate(InfinitiveCyclistsEnumerable);
+            //TryGetNonEnumeratedCount.Demonstrate(InfinitiveCyclistsEnumerable); //Uncomment it if you want to see how .Count() calling infinitive loop
             OrDefault.Demonstrate(Cyclists);
             Zip.Demonstrate(Cyclists);
         }
