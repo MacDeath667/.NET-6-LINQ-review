@@ -53,14 +53,16 @@ internal class Chunks
     private static IEnumerable<IEnumerable<Cyclist>> Chunk2(IEnumerable<Cyclist> source, int chunkSize)
     {
         List<List<Cyclist>> altCluster = new List<List<Cyclist>>();
-        int count = source.Count();
-        for (int i = 0; i < count; i++)
+        int i = 0;
+        foreach (var cyclist in source)
         {
             int chunkIndex = i / chunkSize;
-            if (altCluster.Skip(chunkIndex).FirstOrDefault() is null)
+            if (altCluster.Count <= chunkIndex)
                 altCluster.Add(new List<Cyclist>());
-            altCluster[chunkIndex].Add(source.Skip(i).FirstOrDefault());
+            altCluster[chunkIndex].Add(cyclist);
+            ++i;
         }
+
 
         return altCluster;
     }

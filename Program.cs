@@ -25,6 +25,20 @@ namespace NewLinqFeatures
                 yield return new Cyclist {Id = 5, Name = "Ghost", Age = 33};
             }
         }
+        public static IEnumerable<Cyclist> InfinitiveCyclistsEnumerable
+        {
+            get
+            {
+                while (true)
+                {
+                    yield return new Cyclist {Id = 1, Name = "Gregor", Age = 33};
+                    yield return new Cyclist {Id = 2, Name = "Roman", Age = 32};
+                    yield return new Cyclist {Id = 3, Name = "Roma", Age = 28};
+                    yield return new Cyclist {Id = 4, Name = "Pavel", Age = 29};
+                    yield return new Cyclist {Id = 5, Name = "Ghost", Age = 33};
+                }
+            }
+        }
 
         static void Main()
         {
@@ -35,6 +49,7 @@ namespace NewLinqFeatures
             IndexAndRange.Demonstrate(Cyclists);
             TryGetNonEnumeratedCount.Demonstrate(Cyclists);
             TryGetNonEnumeratedCount.Demonstrate(CyclistsEnumerable);
+            TryGetNonEnumeratedCount.Demonstrate(InfinitiveCyclistsEnumerable);
             OrDefault.Demonstrate(Cyclists);
             Zip.Demonstrate(Cyclists);
         }
